@@ -1,0 +1,32 @@
+<p>Select a file</p>
+
+<div class="row video-field" [formGroup]="form">
+    <mat-form-field>
+    <ngx-mat-file-input formControlName="video" accept=".mp3, .mp4" #fileInput placeholder="Choisir un fichier"> </ngx-mat-file-input>
+    <button mat-icon-button matSuffix>
+        <mat-icon>folder</mat-icon>
+    </button>
+    <button mat-icon-button matSuffix *ngIf="!fileInput.empty" (click)="fileInput.clear($event)">
+        <mat-icon>clear</mat-icon>
+    </button>
+    </mat-form-field>
+</div>
+
+<div class="spinnerContainer" *ngIf="isLoading; else button">
+    <mat-progress-bar color="primary" mode="determinate" [value]="uploadProgress"></mat-progress-bar>
+    <p>{{ uploadProgress }} %</p>
+    <div class="upload-actions">
+      <button mat-raised-button *ngIf="!finishUploadVideo" color="primary" (click)="cancelUpload()">
+        Annuler
+      </button>
+    </div>
+  </div>
+
+  <ng-template #button>
+    <div mat-dialog-actions>
+      <button mat-raised-button cdkFocusInitial color="primary" (click)="uploadVideo()">
+        Ajouter
+      </button>
+      <button mat-button mat-dialog-close>Annuler</button>
+    </div>
+  </ng-template>
