@@ -9,7 +9,7 @@ import { Result } from './result';
     providedIn: 'root'
   })
   export class VideoService {
-    private baseUrl = `http://toto/video`;
+    private baseUrl = `http://localhost:7071/api`;
     private chunkSize = 1048576;
     private filesChunk = new Subscription();
   
@@ -39,7 +39,7 @@ import { Result } from './result';
           let hasFailedChunkFiles: Result | undefined = result.find((res: Result) => res.isSuccess === false);
     
           if (!hasFailedChunkFiles) {
-            const url = `${this.baseUrl}/files/finalize?id=${id}&fileName=${fileName}`;
+            const url = `${this.baseUrl}/files/finalize?fileid=${id}&fileName=${fileName}`;
             const params = new HttpParams({});
     
             this.httpClient
@@ -68,7 +68,7 @@ import { Result } from './result';
           const formData = new FormData();
           formData.append('file', new Blob([buffer.subarray(i, indexTo)]));
           const params = new HttpParams({
-            fromString: `id=${id}&index=${fileIndex.toString()}`
+            fromString: `fileid=${id}&index=${fileIndex.toString()}`
           });
           const request = this.httpClient
             .post<Result>(url, formData, { params })
