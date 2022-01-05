@@ -10,7 +10,7 @@ import { Result } from './result';
   })
   export class VideoService {
     private baseUrl = `http://localhost:7071/api`;
-    private chunkSize = 1048576;
+    private chunkSize = 1048576;//1Mo
     private filesChunk = new Subscription();
   
     constructor(private httpClient: HttpClient) {}
