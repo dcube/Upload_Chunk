@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +35,7 @@ namespace VideoChunk.Functions
                 return new BadRequestObjectResult(new { IsSuccess = false, Message = "No form found" });
             }
 
-            if (formData.Files.Count == 0)
+            if (!formData.Files.Any())
             {
                 return new BadRequestObjectResult(new { IsSuccess = false, Message = "No file found" });
             }
