@@ -50,9 +50,10 @@ import { Result } from './result';
       // Iterate the parts
       for (var i = 0; i < chunks; i++) {
         var start = i * this.chunkSize;
+        var end = Math.min(start + this.chunkSize, file.size);
 
         const formData = new FormData();
-        formData.append('file', file.slice(start, this.chunkSize));
+        formData.append('file', file.slice(start, end));
 
         const params = new HttpParams({
           fromString: `fileid=${id.toString()}&index=${i.toString()}`
